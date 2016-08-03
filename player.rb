@@ -2,15 +2,11 @@ require_relative 'board'
 
 class Player
 
-  attr_reader :starting_location
+  attr_reader :x_coordinate, :y_coordinate
 
-  def initialize
-    board = Board.new
-    board.drawBoard
-    @starting_location = [board.width/2, board.height/2]
+  def initialize(board)
+    @x_coordinate = board.width/2
+    @y_coordinate = board.height/2
   end
 
 end
-
-player = Player.new
-puts player.starting_location
