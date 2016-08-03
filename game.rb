@@ -35,6 +35,12 @@ while player.is_on_board?(board)
     player.move_left
     board.drawBoard(player, bittle)
   end
+
+  if player.got_bittle?(bittle)
+    player.length += 1
+    bittle = Bittle.new(board)
+  end
+
 end
 
 puts "You collided with the wall and died."

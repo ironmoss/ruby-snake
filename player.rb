@@ -29,4 +29,8 @@ class Player
     @x_coordinate > 1 && @y_coordinate > 0 && @x_coordinate < board.width_with_offset && @y_coordinate < board.height - 1 
   end
 
+  def got_bittle?(bittle)
+    @x_coordinate == bittle.x_coordinate && @y_coordinate == bittle.y_coordinate
+  end
+
 end
