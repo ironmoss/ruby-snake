@@ -26,7 +26,7 @@ class Player
   end  
 
   def is_on_board?(board)
-    @x_coordinate > 1 && @y_coordinate > 0 && @x_coordinate < board.width_with_offset && @y_coordinate < board.height - 1 
+    @x_coordinate >= 1 && @y_coordinate >= 0 && @x_coordinate < board.width - 1 && @y_coordinate < board.height
   end
 
   def got_bittle?(bittle)
