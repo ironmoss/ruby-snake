@@ -2,7 +2,7 @@ require_relative 'player'
 
 class Board
 
-  attr_reader :width, :height
+  attr_reader :width, :width_with_offset, :height, :height_with_offset
 
   def initialize
     @width = 40

@@ -8,15 +8,15 @@ class Player
     @x_coordinate = board.width/2
     @y_coordinate = board.height/2
     @length = 1
-    @speed = 0.5
+    @speed = 0.2
   end
 
   def move_player
-    @x_coordinate -= 1
+    @y_coordinate -= 1
   end
 
-  def is_alive?
-    @x_coordinate > 0
+  def is_alive?(board)
+    @x_coordinate > 0 && @y_coordinate > 0 && @x_coordinate < board.width_with_offset - 1 && @y_coordinate < board.height_with_offset
   end
 
 end
