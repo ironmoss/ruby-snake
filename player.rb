@@ -13,4 +13,8 @@ class Player
     @x_coordinate -= 1
   end
 
+  def is_alive?
+    @x_coordinate > 0
+  end
+
 end
