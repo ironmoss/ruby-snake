@@ -2,6 +2,7 @@ require_relative 'keypress'
 require_relative 'board'
 require_relative 'player'
 require_relative 'bittle'
+require_relative 'tailpiece'
 
 # class Game
 
@@ -37,7 +38,7 @@ while player.is_on_board?(board)
   end
 
   if player.got_bittle?(bittle)
-    player.length += 1
+    player.grow
     bittle = Bittle.new(board)
   end
 
