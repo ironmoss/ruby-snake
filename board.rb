@@ -9,7 +9,7 @@ class Board
     @height_with_offset = @height - 2
   end
 
-  def drawBoard(player)
+  def drawBoard(player, bittle)
     border = "="*@width
     body = Array.new(@height) { Array.new(@width, " ") }
 
@@ -19,6 +19,7 @@ class Board
     end
 
     body[player.y_coordinate][player.x_coordinate] = "@"
+    body[bittle.y_coordinate][bittle.x_coordinate] = "$"
 
     puts border
     body.each do |row|
