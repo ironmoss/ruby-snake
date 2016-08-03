@@ -1,5 +1,3 @@
-require_relative 'player'
-
 class Board
 
   attr_reader :width, :width_with_offset, :height, :height_with_offset

@@ -1,5 +1,3 @@
-require_relative 'board'
-
 class Player
 
   attr_accessor :x_coordinate, :y_coordinate, :speed, :length
