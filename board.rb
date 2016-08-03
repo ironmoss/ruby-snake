@@ -10,12 +10,26 @@ class Board
   end
 
   def drawBoard(player)
-    puts "="*@width
-    puts ("|" + " "*@width_with_offset + "|" + "\n")*player.y_coordinate
-    puts ("|" + " "*player.x_coordinate + "@" + " "*(@width_with_offset - player.x_coordinate - player.length) + "|" + "\n")
-    puts ("|" + " "*@width_with_offset + "|" + "\n")*(@height_with_offset - player.y_coordinate)
-    puts "="*@width
+    border = "="*@width
+    body = Array.new(@height) { Array.new(@width, " ") }
+
+    body.each do |row|
+      row[0] = "|"
+      row[@width - 1] = "|"
+    end
+
+    body[player.y_coordinate][player.x_coordinate] = "@"
+
+    puts border
+    body.each do |row|
+      row.each do |elem|
+        print elem
+      end
+      print "\n"
+    end
+    puts border
   end
 
 
 end
+
