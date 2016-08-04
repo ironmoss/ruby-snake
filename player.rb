@@ -12,22 +12,22 @@ class Player
 
   def move_up
     @y_coordinate -= 1
-    move_tail
+    move_tail if @length > 1
   end
 
   def move_down
     @y_coordinate += 1
-    move_tail
+    move_tail if @length > 1
   end
 
   def move_right
     @x_coordinate += 1
-    move_tail
+    move_tail if @length > 1
   end
 
   def move_left
     @x_coordinate -= 1
-    move_tail
+    move_tail if @length > 1
   end  
 
   def is_on_board?(board)
@@ -44,7 +44,9 @@ class Player
   end
 
   def move_tail
-
+    @tail.rotate!(-1)
+    @tail[0].x_coordinate = @x_coordinate
+    @tail[0].y_coordinate = @y_coordinate
   end
 
 end
