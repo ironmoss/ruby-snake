@@ -44,4 +44,5 @@ while player.is_on_board?(board)
 
 end
 
-puts "You collided with the wall and died."
+puts "You collided with the wall and died." if !player.is_on_board?(board)
+# puts "You collided with yourself and died." if !player.missed_tail?
