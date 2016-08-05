@@ -1,12 +1,10 @@
 class Board
 
-  attr_reader :width, :width_with_offset, :height, :height_with_offset
+  attr_reader :width, :height
 
   def initialize
     @width = 40
-    @width_with_offset = @width - 2
     @height = 25
-    @height_with_offset = @height - 2
   end
 
   def drawBoard(player, bittle)
@@ -18,8 +16,11 @@ class Board
       row[@width - 1] = "|"
     end
 
-    body[player.y_coordinate][player.x_coordinate] = "@"
     body[bittle.y_coordinate][bittle.x_coordinate] = "$"
+
+    player.tail.each do |segment|
+      body[segment.y_coordinate][segment.x_coordinate] = "@"
+    end
 
     puts border
     body.each do |row|
@@ -31,6 +32,4 @@ class Board
     puts border
   end
 
-
 end
-

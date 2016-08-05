@@ -2,6 +2,7 @@ require_relative 'keypress'
 require_relative 'board'
 require_relative 'player'
 require_relative 'bittle'
+require_relative 'tailpiece'
 
 # class Game
 
@@ -17,7 +18,7 @@ bittle = Bittle.new(board)
 
 board.drawBoard(player, bittle)
 
-while player.is_on_board?(board)
+while player.is_on_board?(board) && player.missed_tail?
   STDIN.echo = false
   input = STDIN.getc.chr
 
@@ -37,10 +38,11 @@ while player.is_on_board?(board)
   end
 
   if player.got_bittle?(bittle)
-    player.length += 1
+    player.grow
     bittle = Bittle.new(board)
   end
 
 end
 
-puts "You collided with the wall and died."
+puts "You collided with the wall and died." if !player.is_on_board?(board)
+puts "You collided with yourself and died." if !player.missed_tail?
