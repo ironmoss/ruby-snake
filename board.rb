@@ -32,6 +32,4 @@ class Board
     puts border
   end
 
-
 end
-

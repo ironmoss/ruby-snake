@@ -18,7 +18,7 @@ bittle = Bittle.new(board)
 
 board.drawBoard(player, bittle)
 
-while player.is_on_board?(board)
+while player.is_on_board?(board) && player.missed_tail?
   STDIN.echo = false
   input = STDIN.getc.chr
 
@@ -45,4 +45,4 @@ while player.is_on_board?(board)
 end
 
 puts "You collided with the wall and died." if !player.is_on_board?(board)
-# puts "You collided with yourself and died." if !player.missed_tail?
+puts "You collided with yourself and died." if !player.missed_tail?
