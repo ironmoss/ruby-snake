@@ -12,12 +12,12 @@ class Game
     @board = Board.new
     @player = Player.new(@board)
     @bittle = Bittle.new(@board)
+    @board.drawBoard(@player, @bittle)
     play_game
   end
 
   def play_game
-    while @player.is_on_board?(@board)
-      board.drawBoard(@player, @bittle)
+    while @player.is_on_board?(@board) && !@player.hit_tail?
       STDIN.echo = false
       input = STDIN.getc.chr
 
@@ -32,7 +32,7 @@ class Game
         @player.move_left
       end
 
-      @player.move_tail
+      @board.drawBoard(@player, @bittle)
 
       if @player.got_bittle?(@bittle)
         @player.grow
@@ -42,10 +42,10 @@ class Game
     end
 
     puts "You collided with the wall and died." if !@player.is_on_board?(@board)
-    puts "You collided with yourself and died." if !@player.missed_tail?
+    puts "You collided with your tail and died." if @player.hit_tail?
 
   end
 
 end
 
-game = Game.new
+Game.new
