@@ -16,6 +16,7 @@ class Board
       row[@width - 1] = "|"
     end
 
+    body[player.y_coordinate][player.x_coordinate] = "&"
     body[bittle.y_coordinate][bittle.x_coordinate] = "$"
 
     player.tail.each do |segment|

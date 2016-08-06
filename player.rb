@@ -8,31 +8,36 @@ class Player
     @last_x = 0
     @last_y = 0
     @speed = 0.5
-    @tail = [Tailpiece.new(@x_coordinate, @y_coordinate)]
+    @tail = []
   end
 
   def move_up
-    @last_y = @y_coordinate
+    set_last_position
     @y_coordinate -= 1
-    move_tail
+    move_tail if @tail.length > 0
   end
 
   def move_down
-    @last_y = @y_coordinate
+    set_last_position
     @y_coordinate += 1
-    move_tail
+    move_tail if @tail.length > 0
   end
 
   def move_right
-    @last_x = @x_coordinate
+    set_last_position
     @x_coordinate += 1
-    move_tail
+    move_tail if @tail.length > 0
   end
 
   def move_left
-    @last_x = @x_coordinate
+    set_last_position
     @x_coordinate -= 1
-    move_tail
+    move_tail if @tail.length > 0
+  end
+
+  def set_last_position
+    @last_x = x_coordinate
+    @last_y = y_coordinate
   end
 
   def is_on_board?(board)
@@ -49,21 +54,16 @@ class Player
 
   def move_tail
     @tail.rotate!(-1)
-    @tail[0].x_coordinate = @x_coordinate
-    @tail[0].y_coordinate = @y_coordinate
+    @tail[0].x_coordinate = @last_x
+    @tail[0].y_coordinate = @last_y
   end
 
-  def missed_tail?
-    collision = 0
-    tailend = @tail.drop(1)
-    tailend.each do |segment|
-      collision += 1 if segment.x_coordinate == @x_coordinate && segment.y_coordinate == @y_coordinate
+  def hit_tail?
+    collisions = 0
+    @tail.each do |segment|
+      collisions += 1 if segment.x_coordinate == @x_coordinate && segment.y_coordinate == @y_coordinate
     end
-    if collision == 0
-      return true
-    else
-      return false
-    end
+    collisions > 0
   end
 
 end
