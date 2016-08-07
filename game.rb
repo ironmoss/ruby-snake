@@ -1,4 +1,3 @@
-require_relative 'keypress'
 require_relative 'board'
 require_relative 'player'
 require_relative 'bittle'
@@ -18,8 +17,8 @@ class Game
 
   def play_game
     while @player.is_on_board?(@board) && !@player.hit_tail?
-      STDIN.echo = false
-      input = STDIN.getc.chr
+      input = Game.getkey
+      sleep(0.4)
 
       case input
       when "w"
@@ -45,6 +44,13 @@ class Game
     puts "You collided with your tail and died." if @player.hit_tail?
 
   end
+
+  def self.getkey
+    system('stty raw -echo')
+    char = STDIN.read_nonblock(1) rescue nil
+    system('stty -raw echo')
+    return char
+  end  
 
 end
 
