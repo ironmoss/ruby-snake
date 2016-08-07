@@ -7,7 +7,7 @@ class Board
     @height = height
   end
 
-  def drawBoard(player, bittle)
+  def drawBoard(player, bittle, obstacles = nil)
     border = "="*@width
     body = Array.new(@height) { Array.new(@width, " ") }
 
@@ -18,6 +18,12 @@ class Board
 
     body[player.y_coordinate][player.x_coordinate] = "&"
     body[bittle.y_coordinate][bittle.x_coordinate] = "$"
+
+    if obstacles
+      obstacles.each do |obstacle|
+        body[obstacle.y_coordinate][obstacle.x_coordinate] = "#"
+      end    
+    end
 
     player.tail.each do |segment|
       body[segment.y_coordinate][segment.x_coordinate] = "@"
