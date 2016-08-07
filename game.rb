@@ -18,23 +18,25 @@ class Game
   def play_game
     while @player.is_on_board?(@board) && !@player.hit_tail?
       input = Game.getkey
-      sleep(0.4)
+      sleep(player.speed)
 
       case input
       when "w"
-        @player.move_up
+        @player.direction = "up"
       when "s"
-        @player.move_down
+        @player.direction = "down"
       when "d"
-        @player.move_right
+        @player.direction = "right"
       when "a"
-        @player.move_left
+        @player.direction = "left"
       end
 
+      @player.move(@player.direction)
       @board.drawBoard(@player, @bittle)
 
       if @player.got_bittle?(@bittle)
         @player.grow
+        @player.speed -= 0.02
         @bittle = Bittle.new(@board)
       end
 
