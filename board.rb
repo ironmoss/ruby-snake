@@ -2,9 +2,9 @@ class Board
 
   attr_reader :width, :height
 
-  def initialize
-    @width = 40
-    @height = 25
+  def initialize(width = 40, height = 25)
+    @width = width + 2
+    @height = height
   end
 
   def drawBoard(player, bittle)

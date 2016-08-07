@@ -8,7 +8,9 @@ class Game
   attr_reader :board, :player, :bittle
 
   def initialize
-    @board = Board.new
+
+    ARGV.length >= 2 ? @board = Board.new(ARGV[0].to_i, ARGV[1].to_i) : @board = Board.new 
+    
     @player = Player.new(@board)
     @bittle = Bittle.new(@board)
     @board.drawBoard(@player, @bittle)
@@ -36,7 +38,7 @@ class Game
 
       if @player.got_bittle?(@bittle)
         @player.grow
-        @player.speed -= 0.02
+        @player.speed *= 0.9
         @bittle = Bittle.new(@board)
       end
 
