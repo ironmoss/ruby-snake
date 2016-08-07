@@ -1,4 +1,3 @@
-require_relative 'keypress'
 require_relative 'board'
 require_relative 'player'
 require_relative 'bittle'
@@ -18,24 +17,26 @@ class Game
 
   def play_game
     while @player.is_on_board?(@board) && !@player.hit_tail?
-      STDIN.echo = false
-      input = STDIN.getc.chr
+      input = Game.getkey
+      sleep(player.speed)
 
       case input
       when "w"
-        @player.move_up
+        @player.direction = "up"
       when "s"
-        @player.move_down
+        @player.direction = "down"
       when "d"
-        @player.move_right
+        @player.direction = "right"
       when "a"
-        @player.move_left
+        @player.direction = "left"
       end
 
+      @player.move(@player.direction)
       @board.drawBoard(@player, @bittle)
 
       if @player.got_bittle?(@bittle)
         @player.grow
+        @player.speed -= 0.02
         @bittle = Bittle.new(@board)
       end
 
@@ -45,6 +46,13 @@ class Game
     puts "You collided with your tail and died." if @player.hit_tail?
 
   end
+
+  def self.getkey
+    system('stty raw -echo')
+    char = STDIN.read_nonblock(1) rescue nil
+    system('stty -raw echo')
+    return char
+  end  
 
 end
 
