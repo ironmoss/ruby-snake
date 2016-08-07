@@ -1,11 +1,12 @@
 require_relative 'board'
 require_relative 'player'
-require_relative 'bittle'
 require_relative 'tailpiece'
+require_relative 'bittle'
+require_relative 'obstacle'
 
 class Game
 
-  attr_reader :board, :player, :bittle
+  attr_reader :board, :player, :bittle, :obstacles
 
   def initialize
 
@@ -13,12 +14,20 @@ class Game
     
     @player = Player.new(@board)
     @bittle = Bittle.new(@board)
-    @board.drawBoard(@player, @bittle)
+
+    @obstacles = []
+    if ARGV.length > 2
+      ARGV[2].to_i.times do
+        @obstacles << Obstacle.new(@board)
+      end
+    end
+
+    @board.drawBoard(@player, @bittle, @obstacles)
     play_game
   end
 
   def play_game
-    while @player.is_on_board?(@board) && !@player.hit_tail?
+    while @player.is_on_board?(@board) && !@player.hit_tail? && !@player.hit_obstacle?(@obstacles)
       input = Game.getkey
       sleep(player.speed)
 
@@ -34,7 +43,7 @@ class Game
       end
 
       @player.move(@player.direction)
-      @board.drawBoard(@player, @bittle)
+      @board.drawBoard(@player, @bittle, @obstacles)
 
       if @player.got_bittle?(@bittle)
         @player.grow
@@ -46,6 +55,7 @@ class Game
 
     puts "You collided with the wall and died." if !@player.is_on_board?(@board)
     puts "You collided with your tail and died." if @player.hit_tail?
+    puts "You collided with an obstacle and died." if @player.hit_obstacle?(@obstacles)
 
   end
 

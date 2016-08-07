@@ -80,4 +80,12 @@ class Player
     collisions > 0
   end
 
+  def hit_obstacle?(obstacles)
+    collisions = 0
+    obstacles.each do |obstacle|
+      collisions += 1 if obstacle.x_coordinate == @x_coordinate && obstacle.y_coordinate == @y_coordinate
+    end
+    collisions > 0
+  end
+
 end
