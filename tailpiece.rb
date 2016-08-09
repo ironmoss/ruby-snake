@@ -7,5 +7,4 @@ class Tailpiece
     @y_coordinate = y_coordinate
   end
 
-
 end
