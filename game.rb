@@ -22,6 +22,8 @@ class Game
       end
     end
 
+    system('clear')
+
     @board.drawBoard(@player, @bittle, @obstacles)
     play_game
   end
@@ -45,6 +47,8 @@ class Game
       @player.set_last_position
       @player.move(@player.direction)
       @player.move_tail if @player.tail.length > 0
+
+      system('clear')
 
       @board.drawBoard(@player, @bittle, @obstacles)
 
