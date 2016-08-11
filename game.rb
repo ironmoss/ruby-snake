@@ -16,7 +16,7 @@ class Game
     @bittle = Bittle.new(@board)
 
     @obstacles = []
-    if ARGV.length > 2
+    if ARGV[2]
       ARGV[2].to_i.times do
         @obstacles << Obstacle.new(@board)
       end
@@ -42,7 +42,10 @@ class Game
         @player.direction = "left"
       end
 
+      @player.set_last_position
       @player.move(@player.direction)
+      @player.move_tail if @player.tail.length > 0
+
       @board.drawBoard(@player, @bittle, @obstacles)
 
       if @player.got_bittle?(@bittle)

@@ -26,27 +26,19 @@ class Player
   end
 
   def move_up
-    set_last_position
     @y_coordinate -= 1
-    move_tail if @tail.length > 0
   end
 
   def move_down
-    set_last_position
     @y_coordinate += 1
-    move_tail if @tail.length > 0
   end
 
   def move_right
-    set_last_position
     @x_coordinate += 1
-    move_tail if @tail.length > 0
   end
 
   def move_left
-    set_last_position
     @x_coordinate -= 1
-    move_tail if @tail.length > 0
   end
 
   def set_last_position
