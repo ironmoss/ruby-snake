@@ -45,12 +45,8 @@ class Game
       end
 
       @player.set_last_position
-      @player.move(@player.direction)
+      @player.move
       @player.move_tail if @player.tail.length > 0
-
-      system('clear')
-
-      @board.drawBoard(@player, @bittle, @obstacles)
 
       if @player.got_bittle?(@bittle)
         @player.grow
@@ -58,18 +54,21 @@ class Game
         @bittle = Bittle.new(@board)
       end
 
+      system('clear')
+      @board.drawBoard(@player, @bittle, @obstacles)
+
     end
 
-    puts "You collided with the wall and died." if !@player.is_on_board?(@board)
-    puts "You collided with your tail and died." if @player.hit_tail?
-    puts "You collided with an obstacle and died." if @player.hit_obstacle?(@obstacles)
+    puts "You collided with the wall and died.  Your tail has #{@player.tail.length} segments." if !@player.is_on_board?(@board)
+    puts "You collided with your tail and died.  Your tail has #{@player.tail.length} segments." if @player.hit_tail?
+    puts "You collided with an obstacle and died.  Your tail has #{@player.tail.length} segments." if @player.hit_obstacle?(@obstacles)
 
   end
 
   def self.getkey
-    system('stty raw -echo')
+    system('stty raw')
     char = STDIN.read_nonblock(1) rescue nil
-    system('stty -raw echo')
+    system('stty -raw')
     return char
   end  
 
