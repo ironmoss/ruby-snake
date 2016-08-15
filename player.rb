@@ -12,8 +12,8 @@ class Player
     @tail = []
   end
 
-  def move(direction)
-    case direction
+  def move
+    case self.direction
     when "up"
       move_up
     when "down"
