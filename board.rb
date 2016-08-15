@@ -16,17 +16,17 @@ class Board
       row[@width - 1] = "|"
     end
 
-    body[player.y_coordinate][player.x_coordinate] = "&"
-    body[bittle.y_coordinate][bittle.x_coordinate] = "$"
+    body[player.y_coordinate][player.x_coordinate] = "&".blue
+    body[bittle.y_coordinate][bittle.x_coordinate] = "$".yellow
 
     if obstacles
       obstacles.each do |obstacle|
-        body[obstacle.y_coordinate][obstacle.x_coordinate] = "#"
+        body[obstacle.y_coordinate][obstacle.x_coordinate] = "#".red
       end    
     end
 
     player.tail.each do |segment|
-      body[segment.y_coordinate][segment.x_coordinate] = "@"
+      body[segment.y_coordinate][segment.x_coordinate] = "@".light_blue
     end
 
     puts border

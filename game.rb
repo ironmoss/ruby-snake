@@ -4,6 +4,8 @@ require_relative 'tailpiece'
 require_relative 'bittle'
 require_relative 'obstacle'
 
+require 'colorize'
+
 class Game
 
   attr_reader :board, :player, :bittle, :obstacles
