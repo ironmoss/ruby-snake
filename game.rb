@@ -53,7 +53,7 @@ class Game
       if @player.got_bittle?(@bittle)
         @player.grow
         @player.speed *= 0.9
-        @bittle = Bittle.new(@board)
+        add_bittle
       end
 
       system('clear')
@@ -65,6 +65,15 @@ class Game
     puts "You collided with your tail and died.  Your tail has #{@player.tail.length} segments." if @player.hit_tail?
     puts "You collided with an obstacle and died.  Your tail has #{@player.tail.length} segments." if @player.hit_obstacle?(@obstacles)
 
+  end
+
+  def add_bittle
+    @bittle = Bittle.new(@board)
+    @obstacles.each do |obstacle|
+    if obstacle.x_coordinate == @bittle.x_coordinate && obstacle.y_coordinate == @bittle.y_coordinate
+      add_bittle
+      end
+    end
   end
 
   def self.getkey
