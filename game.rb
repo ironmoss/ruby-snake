@@ -1,6 +1,7 @@
 require_relative 'board'
 require_relative 'player'
 require_relative 'tailpiece'
+require_relative 'item'
 require_relative 'bittle'
 require_relative 'obstacle'
 
