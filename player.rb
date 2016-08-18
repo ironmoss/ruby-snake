@@ -1,12 +1,13 @@
 class Player
 
-  attr_accessor :x_coordinate, :y_coordinate, :speed, :direction, :tail
+  attr_accessor :x_coordinate, :y_coordinate, :score, :speed, :direction, :tail
 
   def initialize(board)
     @x_coordinate = board.width/2
     @y_coordinate = board.height/2
     @last_x = 0
     @last_y = 0
+    @score = 0
     @speed = 0.5
     @direction = "left"
     @tail = []

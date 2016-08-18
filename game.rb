@@ -66,6 +66,7 @@ class Game
 
     end
 
+    @player.score = calculated_score
     game_over
 
   end
@@ -79,10 +80,19 @@ class Game
     end
   end
 
+  def calculated_score
+    base_points = @player.tail.length * 1000
+    obstacle_bonus = @obstacles.length + 1
+    board_size_penalty = @board.width + @board.height
+    base_points * obstacle_bonus / board_size_penalty
+  end
+
   def game_over
-    puts "You collided with the wall and died.  Your tail has #{@player.tail.length} segments." if !@player.is_on_board?(@board)
-    puts "You collided with your tail and died.  Your tail has #{@player.tail.length} segments." if @player.hit_something?
-    puts "You collided with an obstacle and died.  Your tail has #{@player.tail.length} segments." if @player.hit_something?(@obstacles)
+    puts "You collided with the wall and died." if !@player.is_on_board?(@board)
+    puts "You collided with your tail and died." if @player.hit_something?
+    puts "You collided with an obstacle and died." if @player.hit_something?(@obstacles)
+    puts "Your tail has #{@player.tail.length} segments."
+    puts "You earned #{@player.score} points."
   end
 
   def self.getkey
