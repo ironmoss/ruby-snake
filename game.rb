@@ -1,6 +1,7 @@
 require_relative 'board'
 require_relative 'player'
 require_relative 'tailpiece'
+require_relative 'item'
 require_relative 'bittle'
 require_relative 'obstacle'
 
@@ -12,14 +13,18 @@ class Game
 
   def initialize
 
-    ARGV.length >= 2 ? @board = Board.new(ARGV[0].to_i, ARGV[1].to_i) : @board = Board.new 
+    width = ARGV[0].to_i if ARGV[0]
+    height = ARGV[1].to_i if ARGV[1]
+    obs = ARGV[2].to_i if ARGV[2]
+
+    width && height ? @board = Board.new(width, height) : @board = Board.new 
     
     @player = Player.new(@board)
     @bittle = Bittle.new(@board)
 
     @obstacles = []
-    if ARGV[2]
-      ARGV[2].to_i.times do
+    if obs
+      obs.times do
         @obstacles << Obstacle.new(@board)
       end
     end
@@ -31,7 +36,7 @@ class Game
   end
 
   def play_game
-    while @player.is_on_board?(@board) && !@player.hit_tail? && !@player.hit_obstacle?(@obstacles)
+    while @player.is_on_board?(@board) && !@player.hit_something? && !@player.hit_something?(@obstacles)
       input = Game.getkey
       sleep(player.speed)
 
@@ -62,8 +67,8 @@ class Game
     end
 
     puts "You collided with the wall and died.  Your tail has #{@player.tail.length} segments." if !@player.is_on_board?(@board)
-    puts "You collided with your tail and died.  Your tail has #{@player.tail.length} segments." if @player.hit_tail?
-    puts "You collided with an obstacle and died.  Your tail has #{@player.tail.length} segments." if @player.hit_obstacle?(@obstacles)
+    puts "You collided with your tail and died.  Your tail has #{@player.tail.length} segments." if @player.hit_something?
+    puts "You collided with an obstacle and died.  Your tail has #{@player.tail.length} segments." if @player.hit_something?(@obstacles)
 
   end
 

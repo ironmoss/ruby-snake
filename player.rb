@@ -15,30 +15,14 @@ class Player
   def move
     case self.direction
     when "up"
-      move_up
+      @y_coordinate -= 1
     when "down"
-      move_down
+      @y_coordinate += 1
     when "left"
-      move_left
+      @x_coordinate -= 1
     when "right"
-      move_right
+      @x_coordinate += 1
     end
-  end
-
-  def move_up
-    @y_coordinate -= 1
-  end
-
-  def move_down
-    @y_coordinate += 1
-  end
-
-  def move_right
-    @x_coordinate += 1
-  end
-
-  def move_left
-    @x_coordinate -= 1
   end
 
   def set_last_position
@@ -64,18 +48,10 @@ class Player
     @tail[0].y_coordinate = @last_y
   end
 
-  def hit_tail?
+  def hit_something?(threats = @tail)
     collisions = 0
-    @tail.each do |segment|
-      collisions += 1 if segment.x_coordinate == @x_coordinate && segment.y_coordinate == @y_coordinate
-    end
-    collisions > 0
-  end
-
-  def hit_obstacle?(obstacles)
-    collisions = 0
-    obstacles.each do |obstacle|
-      collisions += 1 if obstacle.x_coordinate == @x_coordinate && obstacle.y_coordinate == @y_coordinate
+    threats.each do |threat|
+      collisions += 1 if threat.x_coordinate == @x_coordinate && threat.y_coordinate == @y_coordinate
     end
     collisions > 0
   end
