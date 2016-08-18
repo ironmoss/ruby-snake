@@ -13,14 +13,18 @@ class Game
 
   def initialize
 
-    ARGV.length >= 2 ? @board = Board.new(ARGV[0].to_i, ARGV[1].to_i) : @board = Board.new 
+    width = ARGV[0].to_i if ARGV[0]
+    height = ARGV[1].to_i if ARGV[1]
+    obs = ARGV[2].to_i if ARGV[2]
+
+    width && height ? @board = Board.new(width, height) : @board = Board.new 
     
     @player = Player.new(@board)
     @bittle = Bittle.new(@board)
 
     @obstacles = []
-    if ARGV[2]
-      ARGV[2].to_i.times do
+    if obs
+      obs.times do
         @obstacles << Obstacle.new(@board)
       end
     end
