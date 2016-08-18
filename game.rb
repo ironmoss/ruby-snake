@@ -66,9 +66,7 @@ class Game
 
     end
 
-    puts "You collided with the wall and died.  Your tail has #{@player.tail.length} segments." if !@player.is_on_board?(@board)
-    puts "You collided with your tail and died.  Your tail has #{@player.tail.length} segments." if @player.hit_something?
-    puts "You collided with an obstacle and died.  Your tail has #{@player.tail.length} segments." if @player.hit_something?(@obstacles)
+    game_over
 
   end
 
@@ -79,6 +77,12 @@ class Game
       add_bittle
       end
     end
+  end
+
+  def game_over
+    puts "You collided with the wall and died.  Your tail has #{@player.tail.length} segments." if !@player.is_on_board?(@board)
+    puts "You collided with your tail and died.  Your tail has #{@player.tail.length} segments." if @player.hit_something?
+    puts "You collided with an obstacle and died.  Your tail has #{@player.tail.length} segments." if @player.hit_something?(@obstacles)
   end
 
   def self.getkey
