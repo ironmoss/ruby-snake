@@ -15,30 +15,14 @@ class Player
   def move
     case self.direction
     when "up"
-      move_up
+      @y_coordinate -= 1
     when "down"
-      move_down
+      @y_coordinate += 1
     when "left"
-      move_left
+      @x_coordinate -= 1
     when "right"
-      move_right
+      @x_coordinate += 1
     end
-  end
-
-  def move_up
-    @y_coordinate -= 1
-  end
-
-  def move_down
-    @y_coordinate += 1
-  end
-
-  def move_right
-    @x_coordinate += 1
-  end
-
-  def move_left
-    @x_coordinate -= 1
   end
 
   def set_last_position
