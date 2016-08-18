@@ -31,7 +31,7 @@ class Game
   end
 
   def play_game
-    while @player.is_on_board?(@board) && !@player.hit_tail? && !@player.hit_obstacle?(@obstacles)
+    while @player.is_on_board?(@board) && !@player.hit_something? && !@player.hit_something?(@obstacles)
       input = Game.getkey
       sleep(player.speed)
 
@@ -62,8 +62,8 @@ class Game
     end
 
     puts "You collided with the wall and died.  Your tail has #{@player.tail.length} segments." if !@player.is_on_board?(@board)
-    puts "You collided with your tail and died.  Your tail has #{@player.tail.length} segments." if @player.hit_tail?
-    puts "You collided with an obstacle and died.  Your tail has #{@player.tail.length} segments." if @player.hit_obstacle?(@obstacles)
+    puts "You collided with your tail and died.  Your tail has #{@player.tail.length} segments." if @player.hit_something?
+    puts "You collided with an obstacle and died.  Your tail has #{@player.tail.length} segments." if @player.hit_something?(@obstacles)
 
   end
 

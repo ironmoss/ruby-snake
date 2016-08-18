@@ -48,18 +48,10 @@ class Player
     @tail[0].y_coordinate = @last_y
   end
 
-  def hit_tail?
+  def hit_something?(threats = @tail)
     collisions = 0
-    @tail.each do |segment|
-      collisions += 1 if segment.x_coordinate == @x_coordinate && segment.y_coordinate == @y_coordinate
-    end
-    collisions > 0
-  end
-
-  def hit_obstacle?(obstacles)
-    collisions = 0
-    obstacles.each do |obstacle|
-      collisions += 1 if obstacle.x_coordinate == @x_coordinate && obstacle.y_coordinate == @y_coordinate
+    threats.each do |threat|
+      collisions += 1 if threat.x_coordinate == @x_coordinate && threat.y_coordinate == @y_coordinate
     end
     collisions > 0
   end
