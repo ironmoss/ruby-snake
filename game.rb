@@ -36,10 +36,11 @@ class Game
   end
 
   def play_game
+    system("say Welcome to Ruby Snake.  Good luck!")
     while @player.is_on_board?(@board) && !@player.hit_something? && !@player.hit_something?(@obstacles)
-      input = Game.getkey
       sleep(player.speed)
-
+      input = Game.getkey
+      
       case input
       when "w"
         @player.direction = "up"
@@ -81,18 +82,20 @@ class Game
   end
 
   def calculated_score
-    base_points = @player.tail.length * 1000
+    base_points = @player.tail.length * 1000 / @player.speed
     obstacle_bonus = @obstacles.length + 1
     board_size_penalty = @board.width + @board.height
-    base_points * obstacle_bonus / board_size_penalty
+    (base_points * obstacle_bonus / board_size_penalty).to_i
   end
 
   def game_over
-    puts "You collided with the wall and died." if !@player.is_on_board?(@board)
-    puts "You collided with your tail and died." if @player.hit_something?
-    puts "You collided with an obstacle and died." if @player.hit_something?(@obstacles)
-    puts "Your tail has #{@player.tail.length} segments."
-    puts "You earned #{@player.score} points."
+    message = "You collided with the wall and died. " if !@player.is_on_board?(@board)
+    message = "You collided with your tail and died. " if @player.hit_something?
+    message = "You collided with an obstacle and died. " if @player.hit_something?(@obstacles)
+    message += "Your tail has #{@player.tail.length} segments. "
+    message += "You earned #{@player.score} points."
+    puts message
+    system("say " + message)
   end
 
   def self.getkey
